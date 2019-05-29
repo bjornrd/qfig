@@ -129,11 +129,31 @@ void QFig::setImage(QPixmap pixmap)
     _view->fitInView(_imItem, static_cast<Qt::AspectRatioMode>(_aspectRatioMode));
 }
 
+QPixmap QFig::pixmap()
+{
+    auto pm = _imItem->pixmap();
+
+    if (!pm.isNull())
+        return _imItem->pixmap();
+    else
+        return QPixmap();
+}
+
 void QFig::setImage(QImage image)
 {
     _imItem->setPixmap(QPixmap::fromImage(image));
     _scene->setSceneRect(_imItem->boundingRect());
     _view->fitInView(_imItem, static_cast<Qt::AspectRatioMode>(_aspectRatioMode));
+}
+
+QImage QFig::image()
+{
+    auto pm = _imItem->pixmap();
+
+    if(!pm.isNull())
+        return pm.toImage();
+    else
+        return QImage();
 }
 
 QFig* imshow(QPixmap pixmap, QString title, ImageOptions opt, QWidget* parent)

@@ -44,14 +44,16 @@ class QTFIGSHARED_EXPORT QFig : public QMainWindow
          QGraphicsView* view();
          void setView(QGraphicsView* newView);
 
-         qf::FigureResizeOption resizeOption();
+         FigureResizeOption resizeOption();
          void setResizeOption(qf::FigureResizeOption opt);
 
          AspectRatioMode aspectRatioMode() const;
          void setAspectRatioMode(const AspectRatioMode &aspectRatioMode);
 
          void setImage(QPixmap pixmap);
+         QPixmap pixmap();
          void setImage(QImage image);
+         QImage image();
 
     protected:
          void resizeEvent(QResizeEvent* event) override;
