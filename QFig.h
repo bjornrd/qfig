@@ -28,22 +28,8 @@ enum QTFIGSHARED_EXPORT AspectRatioMode {
 };
 
 struct QTFIGSHARED_EXPORT ImageOptions {
-    public:
-        ImageOptions(FigureResizeOption resizeOption    = FigureResizeOption::FitOnResize,                    
-                     AspectRatioMode    aspectRatioMode = AspectRatioMode::KeepAspectRatio) :
-            _figureResizeOption(resizeOption),
-            _aspectRatioMode(aspectRatioMode)
-        {}
-
-        FigureResizeOption figureResizeOption() const {return _figureResizeOption;}
-        void setFigureResizeOption(const FigureResizeOption &opt){_figureResizeOption = opt;}
-
-        AspectRatioMode aspectRatioMode() const {return _aspectRatioMode;}
-        void setAspectRatioMode(const AspectRatioMode &aspectRatioMode) {_aspectRatioMode = aspectRatioMode;}
-
-    private:
-        FigureResizeOption  _figureResizeOption  = FitOnResize;
-        AspectRatioMode     _aspectRatioMode     = KeepAspectRatio;
+        FigureResizeOption  figureResizeOption  = FitOnResize;
+        AspectRatioMode     aspectRatioMode     = KeepAspectRatio;
 };
 
 class QTFIGSHARED_EXPORT QFig : public QMainWindow

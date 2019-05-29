@@ -53,7 +53,6 @@ void QFig::setView(QGraphicsView *newView)
 {
     _view = newView;
     this->setCentralWidget(_view);
-//    _view->viewport()->installEventFilter(this);
 }
 
 FigureResizeOption QFig::resizeOption()
@@ -141,7 +140,7 @@ QFig* imshow(QPixmap pixmap, QString title, ImageOptions opt, QWidget* parent)
 {
     QFig* figure = new QFig(parent);
 
-    figure->setResizeOption(opt.figureResizeOption());
+    figure->setResizeOption(opt.figureResizeOption);
     figure->setWindowTitle(title);
     figure->setImage(pixmap);
     figure->show();
