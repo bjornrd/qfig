@@ -37,6 +37,9 @@ QFig::~QFig()
 {
     if(_view != nullptr)
         delete _view;
+
+    if(_imItem != nullptr)
+        delete _imItem;
 }
 
 void QFig::close()
