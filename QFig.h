@@ -22,38 +22,27 @@ enum QTFIGSHARED_EXPORT FigureResizeOption{
     NoFitOnResize
 };
 
-enum QTFIGSHARED_EXPORT FigureOptions {
-    ZoomOnScroll,
-    GainOnScroll
-};
-
 enum QTFIGSHARED_EXPORT AspectRatioMode {
     KeepAspectRatio   = Qt::AspectRatioMode::KeepAspectRatio,
     IgnoreAspectRatio = Qt::AspectRatioMode::IgnoreAspectRatio
 };
 
-struct ImageOptions {
+struct QTFIGSHARED_EXPORT ImageOptions {
     public:
-        ImageOptions(FigureResizeOption resizeOption    = FigureResizeOption::FitOnResize,
-                     FigureOptions      figureOption    = FigureOptions::ZoomOnScroll,
+        ImageOptions(FigureResizeOption resizeOption    = FigureResizeOption::FitOnResize,                    
                      AspectRatioMode    aspectRatioMode = AspectRatioMode::KeepAspectRatio) :
             _figureResizeOption(resizeOption),
-            _figureOptions(figureOption),
             _aspectRatioMode(aspectRatioMode)
         {}
 
         FigureResizeOption figureResizeOption() const {return _figureResizeOption;}
         void setFigureResizeOption(const FigureResizeOption &opt){_figureResizeOption = opt;}
 
-        FigureOptions figureOptions() const {return _figureOptions;}
-        void setFigureOptions(const FigureOptions &figureOptions) {_figureOptions = figureOptions;}
-
         AspectRatioMode aspectRatioMode() const {return _aspectRatioMode;}
         void setAspectRatioMode(const AspectRatioMode &aspectRatioMode) {_aspectRatioMode = aspectRatioMode;}
 
     private:
         FigureResizeOption  _figureResizeOption  = FitOnResize;
-        FigureOptions       _figureOptions       = ZoomOnScroll;
         AspectRatioMode     _aspectRatioMode     = KeepAspectRatio;
 };
 
@@ -62,7 +51,7 @@ class QTFIGSHARED_EXPORT QFig : public QMainWindow
         Q_OBJECT
     public:
          QFig(QWidget* parent = nullptr);
-        ~QFig();
+        ~QFig() override;
 
          void close();
 
@@ -75,13 +64,22 @@ class QTFIGSHARED_EXPORT QFig : public QMainWindow
          AspectRatioMode aspectRatioMode() const;
          void setAspectRatioMode(const AspectRatioMode &aspectRatioMode);
 
+         void setImage(QPixmap pixmap);
+         void setImage(QImage image);
+
     protected:
-         void resizeEvent(QResizeEvent* event);
+         void resizeEvent(QResizeEvent* event) override;
+         bool eventFilter(QObject* watched, QEvent* event) override;
 
     private:
-        QGraphicsView*      _figureView;
-        FigureResizeOption  _resizeOpt;
-        AspectRatioMode     _aspectRatioMode;
+        QGraphicsView*       _view;
+        QGraphicsScene*      _scene;
+        QGraphicsPixmapItem* _imItem;
+        FigureResizeOption   _resizeOpt;
+        AspectRatioMode      _aspectRatioMode;
+
+        double              _currentGain;
+        double              _gainIncrement;
 };
 
 const static ImageOptions defaultImageOptions = ImageOptions();
