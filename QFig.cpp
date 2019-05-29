@@ -44,17 +44,6 @@ void QFig::close()
     QFig::~QFig();
 }
 
-QGraphicsView* QFig::view()
-{
-    return _view;
-}
-
-void QFig::setView(QGraphicsView *newView)
-{
-    _view = newView;
-    this->setCentralWidget(_view);
-}
-
 FigureResizeOption QFig::resizeOption()
 {
     return _resizeOpt;

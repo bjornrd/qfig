@@ -41,9 +41,6 @@ class QTFIGSHARED_EXPORT QFig : public QMainWindow
 
          void close();
 
-         QGraphicsView* view();
-         void setView(QGraphicsView* newView);
-
          FigureResizeOption resizeOption();
          void setResizeOption(qf::FigureResizeOption opt);
 
