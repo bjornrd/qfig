@@ -1,6 +1,4 @@
 /****************************************************************************
- * Copyright (C) 2019 Bjørn Rudi Dahl
- *
  * Written by: bjornrd
  * 27/5/2019
  * me_brd@hotmail.com
