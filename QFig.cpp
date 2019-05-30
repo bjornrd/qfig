@@ -7,6 +7,7 @@
 #include <QPixmap>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
+#include <QApplication>
 #include <QWheelEvent>
 
 namespace qf{
