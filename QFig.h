@@ -37,6 +37,7 @@ class QTFIGSHARED_EXPORT QFig : public QMainWindow
         Q_OBJECT
     public:
          QFig(QWidget* parent = nullptr);
+         QFig(QImage image, QWidget* parent = nullptr);
         ~QFig() override;
 
          void close();

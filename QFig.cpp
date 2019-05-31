@@ -31,6 +31,28 @@ QFig::QFig(QWidget* parent) :
     this->setCentralWidget(_view);
 }
 
+QFig::QFig(QImage image, QWidget* parent) :
+    QMainWindow(parent),
+    _view(new QGraphicsView()),
+    _scene(new QGraphicsScene(_view)),
+    _imItem(new QGraphicsPixmapItem()),
+    _resizeOpt(FitOnResize),
+    _aspectRatioMode(KeepAspectRatio)
+{
+    // Make the figure windows close when the main app windows close
+    this->setAttribute(Qt::WA_QuitOnClose, false);
+
+    _view->setScene(_scene);
+    _scene->addItem(_imItem);
+    _view->viewport()->installEventFilter(this);
+    _view->setDragMode(QGraphicsView::ScrollHandDrag);
+
+    this->setCentralWidget(_view);
+
+    if(!image.isNull())
+        setImage(image);
+}
+
 QFig::~QFig()
 {
     delete _view;
@@ -113,6 +135,7 @@ void QFig::setImage(QPixmap pixmap)
     _imItem->setPixmap(pixmap);
     _scene->setSceneRect(_imItem->boundingRect());
     _view->fitInView(_imItem, static_cast<Qt::AspectRatioMode>(_aspectRatioMode));
+    this->show();
 }
 
 QPixmap QFig::pixmap()
@@ -127,9 +150,7 @@ QPixmap QFig::pixmap()
 
 void QFig::setImage(QImage image)
 {
-    _imItem->setPixmap(QPixmap::fromImage(image));
-    _scene->setSceneRect(_imItem->boundingRect());
-    _view->fitInView(_imItem, static_cast<Qt::AspectRatioMode>(_aspectRatioMode));
+    setImage(QPixmap::fromImage(image));
 }
 
 QImage QFig::image()
@@ -149,7 +170,6 @@ QFig* imshow(QPixmap pixmap, QString title, ImageOptions opt, QWidget* parent)
     figure->setResizeOption(opt.figureResizeOption);
     figure->setWindowTitle(title);
     figure->setImage(pixmap);
-    figure->show();
 
     return figure;
 }
