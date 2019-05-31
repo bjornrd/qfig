@@ -62,9 +62,6 @@ class QTFIGSHARED_EXPORT QFig : public QMainWindow
         QGraphicsPixmapItem* _imItem;
         FigureResizeOption   _resizeOpt;
         AspectRatioMode      _aspectRatioMode;
-
-        double              _currentGain;
-        double              _gainIncrement;
 };
 
 const static ImageOptions defaultImageOptions = ImageOptions();

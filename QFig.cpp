@@ -18,9 +18,7 @@ QFig::QFig(QWidget* parent) :
     _scene(new QGraphicsScene(_view)),
     _imItem(new QGraphicsPixmapItem()),
     _resizeOpt(FitOnResize),
-    _aspectRatioMode(KeepAspectRatio),
-    _currentGain(1.0),
-    _gainIncrement(0.01)
+    _aspectRatioMode(KeepAspectRatio)
 {
     // Make the figure windows close when the main app windows close
     this->setAttribute(Qt::WA_QuitOnClose, false);    
