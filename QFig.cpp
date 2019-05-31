@@ -33,11 +33,7 @@ QFig::QFig(QWidget* parent) :
 
 QFig::~QFig()
 {
-    if(_view != nullptr)
-        delete _view;
-
-    if(_imItem != nullptr)
-        delete _imItem;
+    delete _view;
 }
 
 void QFig::close()
