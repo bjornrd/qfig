@@ -17,8 +17,8 @@ QFig::QFig(QWidget* parent) :
     _view(new QGraphicsView()),
     _scene(new QGraphicsScene(_view)),
     _imItem(new QGraphicsPixmapItem()),
-    _resizeOpt(FitOnResize),
-    _aspectRatioMode(KeepAspectRatio)
+    _resizeOpt(defaultImageOptions.figureResizeOption),
+    _aspectRatioMode(defaultImageOptions.aspectRatioMode)
 {
     // Make the figure windows close when the main app windows close
     this->setAttribute(Qt::WA_QuitOnClose, false);    
@@ -36,8 +36,8 @@ QFig::QFig(QImage image, QWidget* parent) :
     _view(new QGraphicsView()),
     _scene(new QGraphicsScene(_view)),
     _imItem(new QGraphicsPixmapItem()),
-    _resizeOpt(FitOnResize),
-    _aspectRatioMode(KeepAspectRatio)
+    _resizeOpt(defaultImageOptions.figureResizeOption),
+    _aspectRatioMode(defaultImageOptions.aspectRatioMode)
 {
     // Make the figure windows close when the main app windows close
     this->setAttribute(Qt::WA_QuitOnClose, false);
@@ -165,6 +165,8 @@ QImage QFig::image()
 
 QFig* imshow(QPixmap pixmap, QString title, ImageOptions opt, QWidget* parent)
 {
+    // Special function, that creates a new figure, relieving ownership back to
+    // whatever called this function
     QFig* figure = new QFig(parent);
 
     figure->setResizeOption(opt.figureResizeOption);

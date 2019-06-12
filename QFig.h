@@ -65,12 +65,13 @@ class QTFIGSHARED_EXPORT QFig : public QMainWindow
         AspectRatioMode      _aspectRatioMode;
 };
 
+
 const static ImageOptions defaultImageOptions = ImageOptions();
 
-QTFIGSHARED_EXPORT QFig* imshow(QPixmap pixmap,                 ImageOptions opt = ImageOptions(), QWidget* parent = nullptr);
-QTFIGSHARED_EXPORT QFig* imshow(QPixmap pixmap, QString title,  ImageOptions opt = ImageOptions(), QWidget* parent = nullptr);
-QTFIGSHARED_EXPORT QFig* imshow(QImage image,                   ImageOptions opt = ImageOptions(), QWidget* parent = nullptr);
-QTFIGSHARED_EXPORT QFig* imshow(QImage image,   QString title,  ImageOptions opt = ImageOptions(), QWidget* parent = nullptr);
+QTFIGSHARED_EXPORT QFig* imshow(QPixmap pixmap,                 ImageOptions opt = defaultImageOptions, QWidget* parent = nullptr);
+QTFIGSHARED_EXPORT QFig* imshow(QPixmap pixmap, QString title,  ImageOptions opt = defaultImageOptions, QWidget* parent = nullptr);
+QTFIGSHARED_EXPORT QFig* imshow(QImage image,                   ImageOptions opt = defaultImageOptions, QWidget* parent = nullptr);
+QTFIGSHARED_EXPORT QFig* imshow(QImage image,   QString title,  ImageOptions opt = defaultImageOptions, QWidget* parent = nullptr);
 
 
 }
